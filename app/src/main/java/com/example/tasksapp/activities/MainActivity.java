@@ -1,5 +1,6 @@
-package com.example.tasksapp;
+package com.example.tasksapp.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,11 +9,13 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.tasksapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,30 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+
+
+//        Task task = new Task();
+//        task.info = "task 1";
+//        task.dateCreated = new Date();
+
+//        new InsertTaskAgentAsyncTask(task, this.getApplicationContext()).execute();
+//        task.info = "task 2";
+//        new InsertTaskAgentAsyncTask(task, this.getApplicationContext()).execute();
+
+//        Context applicationContext = this.getApplicationContext();
+//
+//        try {
+//            List<Task> tasks = new GetByIdTaskAgentAsyncTask(applicationContext).execute(1).get();
+//            Toast.makeText(applicationContext, "task : " + task.info, Toast.LENGTH_SHORT).show();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+
     }
 
     @Override
@@ -45,8 +72,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_view_tasks) {
+
+        }
+        if (id == R.id.action_view_tasks) {
+
         }
 
         return super.onOptionsItemSelected(item);
