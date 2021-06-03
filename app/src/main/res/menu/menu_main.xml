@@ -3,13 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.tasksapp.activities.MainActivity">
     <item
-        android:id="@+id/action_view_tasks"
+        android:id="@+id/action_create_new_task"
         android:orderInCategory="100"
-        android:title="List"
+        android:title="New"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_create_new_task"
+        android:id="@+id/action_view_active_tasks"
         android:orderInCategory="101"
-        android:title="New"
+        android:title="Active"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_view_completed_tasks"
+        android:orderInCategory="102"
+        android:title="Completed"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_view_calendar"
+        android:orderInCategory="103"
+        android:title="Calendar"
         app:showAsAction="never" />
 </menu>
