@@ -10,11 +10,14 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="end_date">End Date</string>
-    <string name="dateHint">dd/mm/yyyy</string>
+    <string name="dateHint">dd/MM/yyyy</string>
     <string name="textview">TextView</string>
     <string name="info">Info</string>
     <string name="TimeHint">12:20</string>
     <string name="time">End Time</string>
     <string name="is_completed">Is Completed</string>
     <string name="submit">Submit</string>
+    <string name="Info">Info</string>
+    <string name="save">save</string>
+    <string name="cancel">Cancel</string>
 </resources>

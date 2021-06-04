@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.NewTaskActivity">
+    tools:context=".activities.EditTaskActivity">
 
     <TextView
-        android:id="@+id/newTaskHeaderInfo"
+        android:id="@+id/editTaskHeaderInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/newTaskValueDate"
+        android:id="@+id/editTaskValueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,20 +27,20 @@
         android:inputType="date"
         android:hint="@string/dateHint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskValueInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueInfo" />
 
     <TextView
-        android:id="@+id/newTaskHeaderDate"
+        android:id="@+id/editTaskHeaderDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/end_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskValueInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueInfo" />
 
     <EditText
-        android:id="@+id/newTaskValueInfo"
+        android:id="@+id/editTaskValueInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -54,55 +54,65 @@
         android:importantForAutofill="no" />
 
     <TextView
-        android:id="@+id/newTaskHeaderTime"
+        android:id="@+id/editTaskHeaderTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskValueDate" />
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueDate" />
 
     <EditText
-        android:id="@+id/newTaskValueTime"
+        android:id="@+id/editTaskValueTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="time"
         android:hint="@string/TimeHint"
+        android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskValueDate"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueDate" />
 
     <TextView
-        android:id="@+id/newTaskHeaderIsCompleted"
+        android:id="@+id/editTaskHeaderIsCompleted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/is_completed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskValueTime" />
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueTime" />
 
     <Switch
-        android:id="@+id/newTaskValueIsCompleted"
+        android:id="@+id/editTaskValueIsCompleted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskValueTime" />
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueTime" />
 
     <Button
-        android:id="@+id/newTaskSubmit"
+        android:id="@+id/editTaskSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/submit"
+        android:text="@string/save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTaskValueIsCompleted" />
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueIsCompleted" />
+
+    <Button
+        android:id="@+id/editTaskCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTaskValueIsCompleted" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

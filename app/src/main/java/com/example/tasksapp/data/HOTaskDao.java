@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.tasksapp.async.tasks.GetAllAgentAsyncTask;
 import com.example.tasksapp.async.tasks.InsertTaskAgentAsyncTask;
+import com.example.tasksapp.async.tasks.UpdateTaskAgentAsyncTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,4 +27,7 @@ public class HOTaskDao {
         new InsertTaskAgentAsyncTask(task, context).execute();
     }
 
+    public static void UpdateTask(Context context, Task task){
+        new UpdateTaskAgentAsyncTask(task, context).execute();
+    }
 }

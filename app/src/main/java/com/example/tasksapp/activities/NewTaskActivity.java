@@ -1,5 +1,6 @@
 package com.example.tasksapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.MenuItem;
@@ -12,11 +13,6 @@ import com.example.tasksapp.Misc;
 import com.example.tasksapp.R;
 import com.example.tasksapp.data.HOTaskDao;
 import com.example.tasksapp.data.Task;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
 
 public class NewTaskActivity extends BaseActivity {
 
@@ -34,26 +30,26 @@ public class NewTaskActivity extends BaseActivity {
                 Editable endTime =((EditText)findViewById(R.id.newTaskValueTime)).getText();
                 boolean isCompleted = ((Switch)findViewById(R.id.newTaskValueIsCompleted)).isChecked();
                 Task task = new Task();
-                task.info = info.toString();
-                task.dateCreated = Misc.localToGMT(new Date());
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTimeZone(TimeZone.getDefault());
-                calendar.set(Calendar.DATE, Integer.parseInt(endDate.toString().split("/")[0]));
-                calendar.set(Calendar.MONTH, Integer.parseInt(endDate.toString().split("/")[1]) - 1);
-                calendar.set(Calendar.YEAR, Integer.parseInt(endDate.toString().split("/")[2]));
-
-                calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(endTime.toString().split(":")[0]));
-                calendar.set(Calendar.MINUTE, Integer.parseInt(endTime.toString().split(":")[1]));
-
-
-                task.dateCompleted = Misc.localToGMT(calendar.getTime());
-                task.isCompleted = isCompleted;
+                Misc.fillTask(info, endDate, endTime, isCompleted, task);
 
                 HOTaskDao.InsertTask(NewTaskActivity.this.getApplicationContext(), task);
+
+                Intent intent = new Intent(NewTaskActivity.this.getApplicationContext(), ListTasksActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                NewTaskActivity.this.getApplicationContext().startActivity(intent);
             }
         });
+
+
+        EditText edittext= (EditText) findViewById(R.id.newTaskValueDate);
+
+
+
+
+
+
     }
+
 
 
 
