@@ -22,6 +22,7 @@ import java.util.List;
 public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.ViewHolder> {
     private List<Task> _tasks;
     private Context _context;
+    private boolean _inactiveTasksFlag;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final Switch _switch;
@@ -43,9 +44,10 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
         }
     }
 
-    public ListTasksAdapter(List<Task> tasks, Context context) {
+    public ListTasksAdapter(List<Task> tasks, Context context, boolean inactiveTasksFlag) {
         _tasks = tasks;
         _context = context;
+        _inactiveTasksFlag = inactiveTasksFlag;
     }
 
     @NonNull
@@ -66,7 +68,7 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
                 intent.putExtra("id", _tasks.get(position).uid);
                 intent.putExtra("info", _tasks.get(position).info);
                 intent.putExtra("time", _tasks.get(position).dateCompleted.getTime());
-                intent.putExtra("isCompl", _tasks.get(position).isCompleted);
+                intent.putExtra("isCompleted", _tasks.get(position).isCompleted);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 _context.startActivity(intent);
             }
@@ -74,9 +76,9 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
         Switch aSwitch = holder.getSwitch();
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (_inactiveTasksFlag != isChecked){
                     Task task = _tasks.get(position);
-                    task.isCompleted = true;
+                    task.isCompleted = !task.isCompleted;
                     HOTaskDao.UpdateTask(_context, task);
                     remove(position);
 

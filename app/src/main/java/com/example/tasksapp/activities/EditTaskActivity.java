@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.tasksapp.Misc;
 import com.example.tasksapp.R;
 import com.example.tasksapp.data.HOTaskDao;
@@ -18,7 +16,7 @@ import com.example.tasksapp.data.Task;
 import java.util.Calendar;
 import java.util.Date;
 
-public class EditTaskActivity extends AppCompatActivity {
+public class EditTaskActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,5 +84,8 @@ public class EditTaskActivity extends AppCompatActivity {
                 EditTaskActivity.this.getApplicationContext().startActivity(intent);
             }
         });
+
+
+
     }
 }

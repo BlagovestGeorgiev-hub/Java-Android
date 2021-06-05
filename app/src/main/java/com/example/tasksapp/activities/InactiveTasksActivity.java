@@ -13,19 +13,19 @@ import com.example.tasksapp.data.Task;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ListTasksActivity extends BaseActivity {
+public class InactiveTasksActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_tasks);
+        setContentView(R.layout.activity_inactive_tasks);
 
-        RecyclerView recycler = (RecyclerView) findViewById(R.id.listTasksRecyclerView);
-        List<Task> tasks = HOTaskDao.GetAllTasks(ListTasksActivity.this.getApplicationContext()).stream().filter(t -> !t.isCompleted).collect(Collectors.toList());
+        RecyclerView recycler = (RecyclerView) findViewById(R.id.listInactiveTasksRecyclerView);
+        List<Task> tasks = HOTaskDao.GetAllTasks(InactiveTasksActivity.this.getApplicationContext()).stream().filter(t -> t.isCompleted).collect(Collectors.toList());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
-        ListTasksAdapter listAdapter = new ListTasksAdapter(tasks, this.getApplicationContext(), false);
+        ListTasksAdapter listAdapter = new ListTasksAdapter(tasks, this.getApplicationContext(), true);
         recycler.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
     }

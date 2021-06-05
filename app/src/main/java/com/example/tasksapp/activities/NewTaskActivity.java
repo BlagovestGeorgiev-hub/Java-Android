@@ -44,10 +44,6 @@ public class NewTaskActivity extends BaseActivity {
         EditText edittext= (EditText) findViewById(R.id.newTaskValueDate);
 
 
-
-
-
-
     }
 
 
