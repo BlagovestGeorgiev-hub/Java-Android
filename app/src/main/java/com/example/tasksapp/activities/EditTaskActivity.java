@@ -79,9 +79,7 @@ public class EditTaskActivity extends BaseActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditTaskActivity.this.getApplicationContext(), ListTasksActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                EditTaskActivity.this.getApplicationContext().startActivity(intent);
+                EditTaskActivity.super.onBackPressed();
             }
         });
 
