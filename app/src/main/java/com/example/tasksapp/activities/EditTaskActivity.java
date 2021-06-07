@@ -1,5 +1,6 @@
 package com.example.tasksapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +16,8 @@ import com.example.tasksapp.data.Task;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class EditTaskActivity extends BaseActivity {
 
@@ -38,16 +41,16 @@ public class EditTaskActivity extends BaseActivity {
         int mYear = next.get(Calendar.YEAR);
         int mMonth = next.get(Calendar.MONTH) + 1;
         int mDay = next.get(Calendar.DAY_OF_MONTH);
-        int mHour =  next.get(Calendar.HOUR_OF_DAY);
-        int mMins =  next.get(Calendar.MINUTE);
+        int mHour = next.get(Calendar.HOUR_OF_DAY);
+        int mMins = next.get(Calendar.MINUTE);
 
-        String dateToShow = (mDay < 10 ? "0" +  mDay : mDay) + "/" + (mMonth < 10 ? "0" +  mMonth : mMonth) + "/" + mYear;
-        String timeToShow = (mHour < 10 ? "0" +  mHour : mHour) + ":" + (mMins < 10 ? "0" +  mMins : mMins);
+        String dateToShow = (mDay < 10 ? "0" + mDay : mDay) + "/" + (mMonth < 10 ? "0" + mMonth : mMonth) + "/" + mYear;
+        String timeToShow = (mHour < 10 ? "0" + mHour : mHour) + ":" + (mMins < 10 ? "0" + mMins : mMins);
 
-        EditText editTaskValueInfo =(EditText) findViewById(R.id.editTaskValueInfo);
+        EditText editTaskValueInfo = (EditText) findViewById(R.id.editTaskValueInfo);
         editTaskValueInfo.setText(info);
 
-        EditText editTaskValueDate =(EditText) findViewById(R.id.editTaskValueDate);
+        EditText editTaskValueDate = (EditText) findViewById(R.id.editTaskValueDate);
         editTaskValueDate.setText(dateToShow);
 
         EditText editTaskValueTime = (EditText) findViewById(R.id.editTaskValueTime);
@@ -60,14 +63,17 @@ public class EditTaskActivity extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Editable editTaskValueInfo = ((EditText) findViewById(R.id.editTaskValueInfo)).getText();;
-                Editable editTaskValueDate = ((EditText) findViewById(R.id.editTaskValueDate)).getText();;
-                Editable editTaskValueTime = ((EditText) findViewById(R.id.editTaskValueTime)).getText();;
+                Editable editTaskValueInfo = ((EditText) findViewById(R.id.editTaskValueInfo)).getText();
+                ;
+                Editable editTaskValueDate = ((EditText) findViewById(R.id.editTaskValueDate)).getText();
+                ;
+                Editable editTaskValueTime = ((EditText) findViewById(R.id.editTaskValueTime)).getText();
+                ;
                 boolean isCompleted = ((Switch) findViewById(R.id.editTaskValueIsCompleted)).isChecked();
                 Task task = new Task();
                 task.uid = id;
                 Misc.fillTask(editTaskValueInfo, editTaskValueDate, editTaskValueTime, isCompleted, task);
-                HOTaskDao.UpdateTask(EditTaskActivity.this.getApplicationContext(),task);
+                HOTaskDao.UpdateTask(EditTaskActivity.this.getApplicationContext(), task);
 
                 Intent intent = new Intent(EditTaskActivity.this.getApplicationContext(), ListTasksActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -83,6 +89,18 @@ public class EditTaskActivity extends BaseActivity {
             }
         });
 
+        Button delete = (Button) findViewById(R.id.editTaskDelete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Task> tasks = HOTaskDao.GetAllTasks(EditTaskActivity.this);
+                List<Task> filter = tasks.stream().filter(task -> task.uid == id).collect(Collectors.toList());
+                HOTaskDao.DeleteTask(EditTaskActivity.this, filter.get(0));
+                Intent intent = new Intent(EditTaskActivity.this.getApplicationContext(), ListTasksActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                EditTaskActivity.this.getApplicationContext().startActivity(intent);
+            }
+        });
 
 
     }
