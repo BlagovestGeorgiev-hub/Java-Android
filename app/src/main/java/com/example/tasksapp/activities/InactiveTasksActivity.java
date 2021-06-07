@@ -57,7 +57,7 @@ public class InactiveTasksActivity extends BaseActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(layoutManager);
-        ListTasksAdapter listAdapter = new ListTasksAdapter(tasks, this.getApplicationContext(), true);
+        ListTasksAdapter listAdapter = new ListTasksAdapter(tasks, this.getApplicationContext(), true, this);
         recycler.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
     }

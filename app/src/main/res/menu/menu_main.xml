@@ -9,17 +9,22 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/action_view_active_tasks"
-        android:orderInCategory="101"
+        android:orderInCategory="100"
         android:title="Active"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_view_completed_tasks"
-        android:orderInCategory="102"
+        android:orderInCategory="100"
         android:title="Completed"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_view_calendar"
-        android:orderInCategory="103"
+        android:orderInCategory="100"
         android:title="Calendar"
         app:showAsAction="never" />
+<!--    <item-->
+<!--        android:id="@+id/notification"-->
+<!--        android:orderInCategory="100"-->
+<!--        android:title="N:0"-->
+<!--        app:showAsAction="ifRoom" />-->
 </menu>

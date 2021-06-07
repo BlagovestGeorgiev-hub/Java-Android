@@ -20,4 +20,6 @@
     <string name="Info">Info</string>
     <string name="save">save</string>
     <string name="cancel">Cancel</string>
+    <string name="channel_name">task_app_chanel</string>
+    <string name="channel_description">task_app_chanel_desc</string>
 </resources>

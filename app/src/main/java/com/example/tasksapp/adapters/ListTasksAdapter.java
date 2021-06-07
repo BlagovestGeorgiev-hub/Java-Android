@@ -10,6 +10,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tasksapp.R;
@@ -23,6 +24,7 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
     private List<Task> _tasks;
     private Context _context;
     private boolean _inactiveTasksFlag;
+    private AppCompatActivity _aca;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final Switch _switch;
@@ -44,10 +46,11 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
         }
     }
 
-    public ListTasksAdapter(List<Task> tasks, Context context, boolean inactiveTasksFlag) {
+    public ListTasksAdapter(List<Task> tasks, Context context, boolean inactiveTasksFlag, AppCompatActivity acp) {
         _tasks = tasks;
         _context = context;
         _inactiveTasksFlag = inactiveTasksFlag;
+        _aca = acp;
     }
 
     @NonNull
@@ -81,6 +84,7 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
                     task.isCompleted = !task.isCompleted;
                     HOTaskDao.UpdateTask(_context, task);
                     remove(position);
+                    _aca.invalidateOptionsMenu();
 
                 }
             }
