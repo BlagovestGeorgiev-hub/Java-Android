@@ -2,6 +2,7 @@ package com.example.tasksapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,10 @@ import com.example.tasksapp.activities.EditTaskActivity;
 import com.example.tasksapp.data.HOTaskDao;
 import com.example.tasksapp.data.Task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.ViewHolder> {
@@ -30,11 +35,14 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
         private final Switch _switch;
         private final TextView textView;
 
+        private final TextView textViewTime;
+
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
             _switch = (Switch) view.findViewById(R.id.listItemSwitch);
             textView = (TextView) view.findViewById(R.id.listItemInfo);
+            textViewTime = (TextView) view.findViewById(R.id.listItemTime);
         }
 
         public TextView getTextView() {
@@ -43,6 +51,10 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
 
         public Switch getSwitch() {
             return _switch;
+        }
+
+        public TextView getTextViewTime() {
+            return textViewTime;
         }
     }
 
@@ -63,8 +75,25 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getTextView().setText(_tasks.get(position).info);
-        holder.getTextView().setOnClickListener(new  View.OnClickListener() {
+        String infoString = _tasks.get(position).info;
+        String infoSubString;
+        if (infoString.length() > 20) {
+            infoSubString = infoString.substring(0, 20);
+            infoSubString = infoSubString + "...";
+        } else {
+            infoSubString = infoString;
+        }
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        _aca.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        if (width<500&&infoString.length() > 12){
+            infoSubString = infoString.substring(0, 12);
+            infoSubString = infoSubString + "...";
+        }
+        holder.getTextView().setText(infoSubString);
+        holder.getTextView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(_context, EditTaskActivity.class);
@@ -79,7 +108,7 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
         Switch aSwitch = holder.getSwitch();
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (_inactiveTasksFlag != isChecked){
+                if (_inactiveTasksFlag != isChecked) {
                     Task task = _tasks.get(position);
                     task.isCompleted = !task.isCompleted;
                     HOTaskDao.UpdateTask(_context, task);
@@ -90,6 +119,10 @@ public class ListTasksAdapter extends RecyclerView.Adapter<ListTasksAdapter.View
             }
         });
         aSwitch.setChecked(_tasks.get(position).isCompleted);
+        String pattern = "dd/MM/yyyy";
+        DateFormat df = new SimpleDateFormat(pattern);
+        String todayAsString = df.format(_tasks.get(position).dateCompleted);
+        holder.getTextViewTime().setText(todayAsString);
     }
 
     @Override

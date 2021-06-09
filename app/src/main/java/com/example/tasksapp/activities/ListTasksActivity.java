@@ -102,10 +102,6 @@ public class ListTasksActivity extends BaseActivity {
         notificationManager.notify(1, builder.build());
     }
 
-    // TODO : one notification per day
-    //        notifications id must be unique
-    //        refactor the smelly code
-    //        commit and finish 
 
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
